@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171916">
+  <meta name="description" content="Brexit — барбершоп в Астрахани. Мужские стрижки, оформление бороды и уход. Запись онлайн.">
+  <title>Brexit Barbershop — Астрахань</title>
+  <style>
+    :root {
+      --ink: #171916;
+      --ink-soft: #242722;
+      --paper: #f0eee7;
+      --paper-deep: #e5e2d8;
+      --sage: #8f9b87;
+      --sage-dark: #657360;
+      --gold: #b8a46c;
+      --muted: #73746d;
+      --line: rgba(23, 25, 22, .16);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+    main > section, .site-footer { scroll-snap-align: start; scroll-snap-stop: always; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: var(--sans); }
+    a { color: inherit; }
+    button { font: inherit; }
+    .wrap { width: min(1240px, calc(100% - 64px)); margin: 0 auto; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--sage-dark); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; display: block; width: 28px; height: 1px; background: currentColor; }
+    .brand { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; width: 128px; height: 88px; padding: 0; overflow: hidden; background: transparent; text-decoration: none; }
+    .brand img { display: block; width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(.92); }
+    .button { --button-rotate-x: 0deg; --button-rotate-y: 0deg; --button-depth: 0px; --button-scale: 1; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 50px; padding: 0 23px; border: 1px solid transparent; text-decoration: none; text-transform: uppercase; letter-spacing: .1em; font-size: 10px; font-weight: 750; transform: perspective(850px) rotateX(var(--button-rotate-x)) rotateY(var(--button-rotate-y)) translateZ(var(--button-depth)) scale(var(--button-scale)); transform-style: preserve-3d; box-shadow: 0 2px 0 rgba(23,25,22,.18); transition: transform .32s cubic-bezier(.2,.7,.25,1), box-shadow .32s ease, background .2s ease, color .2s ease; cursor: pointer; will-change: transform; }
+    .button:hover { --button-depth: 9px; --button-scale: 1.035; box-shadow: 0 13px 26px rgba(23,25,22,.24); }
+    .button:active { --button-depth: 2px; --button-scale: .985; box-shadow: 0 4px 10px rgba(23,25,22,.2); }
+    .button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+    .button > span { transform: translateZ(5px); }
+    .button--sage { background: var(--sage); color: var(--ink); }
+    .button--sage:hover { background: #a7b39f; }
+    .button--dark { background: var(--ink); color: var(--paper); }
+    .button--outline { border-color: currentColor; color: inherit; background: transparent; }
+    .button--outline:hover { background: var(--ink); color: var(--paper); }
+
+    .site-header { position: absolute; z-index: 5; top: 0; left: 0; width: 100%; color: white; }
+    .header-inner { min-height: 92px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.2); }
+    .nav { display: flex; align-items: center; gap: clamp(20px, 3vw, 44px); }
+    .nav a { color: rgba(255,255,255,.82); text-decoration: none; text-transform: uppercase; letter-spacing: .15em; font-size: 9px; transition: color .2s ease; }
+    .nav a:hover { color: white; }
+    .header-book { min-height: 42px; padding: 0 18px; font-size: 9px; }
+    .menu-toggle { display: none; border: 1px solid rgba(255,255,255,.5); background: transparent; color: white; width: 42px; height: 42px; }
+
+    .hero { position: relative; display: flex; align-items: center; min-height: 100vh; min-height: 100svh; padding: 150px 0 86px; overflow: hidden; background: var(--ink); color: var(--paper); }
+    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(17,19,16,.98) 0%, rgba(17,19,16,.9) 31%, rgba(17,19,16,.35) 62%, rgba(17,19,16,.1) 100%), url("assets/hero-barbershop-placeholder.jpg") center 48% / cover no-repeat; opacity: .92; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(17,19,16,.72), transparent 42%), radial-gradient(ellipse at 50% 44%, transparent 32%, rgba(9,10,8,.58) 100%); pointer-events: none; }
+    .hero-content { position: relative; z-index: 1; width: min(1240px, calc(100% - 64px)); margin: 0 auto; }
+    .hero-copy { max-width: 610px; }
+    .hero .eyebrow { color: #c9c5b6; }
+    .hero h1 { max-width: 650px; margin: 27px 0 22px; font: 400 clamp(52px, 7.4vw, 102px)/.94 var(--serif); letter-spacing: -.055em; }
+    .hero h1 em { color: #b3c0a9; font-style: italic; }
+    .hero-lede { max-width: 420px; margin: 0; color: rgba(240,238,231,.76); font-size: 15px; line-height: 1.8; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .hero-side-note { position: absolute; right: 32px; bottom: 104px; z-index: 2; color: rgba(255,255,255,.58); writing-mode: vertical-rl; transform: rotate(180deg); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+    .hero-index { position: absolute; z-index: 2; right: 0; bottom: 35px; left: 0; display: flex; justify-content: space-between; align-items: center; width: min(1240px, calc(100% - 64px)); margin: auto; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.24); color: rgba(255,255,255,.66); font-size: 9px; letter-spacing: .17em; text-transform: uppercase; }
+    .hero-index strong { color: white; font-weight: 500; }
+
+    .section { padding: 112px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 42px; }
+    .section h2 { margin: 15px 0 0; font: 400 clamp(42px, 6vw, 73px)/.98 var(--serif); letter-spacing: -.045em; }
+    .section-intro { max-width: 320px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+
+    .masters { background: var(--paper); }
+    .masters-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: clamp(38px, 7vw, 96px); }
+    .masters-copy { max-width: 480px; }
+    .masters-copy h2 { margin: 16px 0 24px; font: 400 clamp(46px, 5.2vw, 66px)/1 var(--serif); letter-spacing: -.045em; }
+    .masters-copy p { max-width: 400px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .masters-showcase { min-width: 0; }
+    .carousel-arrow { display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 20px; cursor: pointer; transition: background .2s ease, color .2s ease; }
+    .carousel-arrow:hover { background: var(--ink); color: var(--paper); }
+    .master-track { position: relative; width: 100%; min-height: 580px; overflow: hidden; isolation: isolate; touch-action: pan-y; }
+    .master-card { position: absolute; top: 4px; left: 50%; width: min(294px, 52%); background: #e8e5dc; box-shadow: 0 22px 70px rgba(23,25,22,.16); transform: translate3d(-50%, 0, 0); transition: transform .65s cubic-bezier(.2,.75,.25,1), filter .45s ease, opacity .45s ease; will-change: transform, filter, opacity; }
+    .master-card.is-active { z-index: 4; filter: none; opacity: 1; pointer-events: auto; }
+    .master-card.is-neighbor { z-index: 2; filter: blur(3px); opacity: .56; pointer-events: none; }
+    .master-card.is-hidden { z-index: 0; filter: blur(7px); opacity: 0; pointer-events: none; }
+    .portrait { min-height: 300px; overflow: hidden; background: var(--sage); }
+    .portrait--two { background: var(--ink); }
+    .portrait--three { background: var(--paper); }
+    .portrait--four { background: var(--sage); }
+    .portrait--five { background: var(--ink); }
+    .master-info { padding: 22px 22px 24px; }
+    .master-role { color: var(--sage-dark); font-size: 8px; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+    .master-info h3 { margin: 8px 0 10px; font: 400 30px/1 var(--serif); }
+    .master-meta { min-height: 37px; margin: 0; color: #65675f; font-size: 12px; line-height: 1.55; }
+    .master-quip { min-height: 47px; margin: 15px 0 20px; padding-left: 13px; border-left: 1px solid var(--gold); font: italic 15px/1.45 var(--serif); }
+    .master-info .button { width: 100%; min-height: 45px; }
+    .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 16px; width: fit-content; margin: 15px auto 0; }
+    .carousel-foot { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 10px; color: var(--muted); font-size: 9px; letter-spacing: .13em; text-align: center; text-transform: uppercase; }
+    .carousel-foot span:first-child { color: var(--sage-dark); }
+    .carousel-dots { display: flex; gap: 5px; }
+    .carousel-dot { width: 18px; height: 2px; border: 0; padding: 0; background: #c7c5bd; cursor: pointer; }
+    .carousel-dot.is-active { background: var(--sage-dark); }
+
+    .about { background: var(--ink); color: var(--paper); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11%; align-items: center; }
+    .about .eyebrow { color: #b1bba9; }
+    .about h2 { max-width: 550px; }
+    .about-copy { color: rgba(240,238,231,.72); font-size: 14px; line-height: 1.9; }
+    .about-copy p { margin: 0 0 18px; }
+    .about-signature { margin-top: 25px; color: #b5c1ac; font: italic 24px var(--serif); }
+
+    .services { background: var(--paper-deep); }
+    .service-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 9%; }
+    .service { display: flex; justify-content: space-between; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .service-name { max-width: 280px; font: 400 19px/1.2 var(--serif); }
+    .service-note { display: block; margin-top: 5px; color: var(--muted); font: 10px/1.4 var(--sans); }
+    .service-price { white-space: nowrap; color: var(--sage-dark); font: 400 16px var(--serif); }
+    .services-bottom { display: flex; justify-content: space-between; align-items: center; gap: 25px; margin-top: 34px; }
+    .services-bottom p { max-width: 500px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+
+    .visit { padding: 0; background: var(--sage); color: var(--ink); }
+    .visit-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; }
+    .visit-copy { display: flex; flex-direction: column; align-items: start; justify-content: center; padding: 70px max(36px, calc((100vw - 1240px) / 2)); padding-right: 8%; }
+    .visit-copy .eyebrow { color: rgba(23,25,22,.65); }
+    .visit-copy h2 { max-width: 420px; }
+    .visit-copy p { max-width: 350px; margin: 18px 0 20px; color: rgba(23,25,22,.7); font-size: 13px; line-height: 1.7; }
+    .visit-actions { display: grid; width: min(100%, 360px); gap: 9px; }
+    .visit-route { width: 100%; min-height: 68px; justify-content: space-between; padding: 12px 16px; background: var(--paper); color: var(--ink); text-align: left; text-transform: none; letter-spacing: 0; }
+    .visit-route:hover { background: var(--paper-deep); color: var(--ink); }
+    .visit-route__text { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+    .visit-route__address { font: 16px/1.15 var(--serif); }
+    .visit-route__action { color: var(--sage-dark); font-size: 8px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+    .visit-route > span:last-child { color: var(--gold); font-size: 18px; }
+    .visit-map { position: relative; min-height: 420px; overflow: hidden; isolation: isolate; background: var(--paper); }
+    .visit-map-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+    .map-marker { position: absolute; z-index: 2; top: var(--map-y); left: var(--map-x); display: block; width: 44px; height: 44px; color: var(--paper); text-decoration: none; transform: translate(-50%, -50%); }
+    .map-marker__dot { display: grid; place-items: center; width: 100%; height: 100%; border: 2px solid var(--paper); border-radius: 50%; background: var(--gold); color: var(--ink); box-shadow: 0 6px 22px rgba(0,0,0,.36); font: 700 17px var(--serif); transition: transform .2s ease, box-shadow .2s ease; }
+    .map-marker:hover .map-marker__dot { transform: scale(1.09); box-shadow: 0 8px 26px rgba(0,0,0,.48); }
+    .map-marker:focus-visible .map-marker__dot { outline: 2px solid var(--paper); outline-offset: 4px; }
+    .map-marker__card { position: absolute; top: 50%; left: calc(100% + 10px); display: block; width: 222px; padding: 12px 14px; border: 1px solid rgba(240,238,231,.26); background: rgba(23,25,22,.9); box-shadow: 0 8px 28px rgba(0,0,0,.18); backdrop-filter: blur(8px); transform: translateY(-50%); }
+    .map-marker--north .map-marker__card { right: calc(100% + 10px); left: auto; }
+    .map-marker__name { display: block; margin-bottom: 5px; color: #d1bd83; font: 19px/1 var(--serif); }
+    .map-marker__address { display: block; color: rgba(240,238,231,.8); font-size: 10px; line-height: 1.45; }
+    .map-marker__hint { display: block; margin-top: 7px; color: rgba(240,238,231,.48); font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
+    .map-note { position: absolute; z-index: 1; right: 24px; bottom: 19px; color: rgba(240,238,231,.56); font-size: 8px; letter-spacing: .15em; text-transform: uppercase; }
+
+    .site-footer { padding: 44px 0 26px; background: #11130f; color: var(--paper); }
+    .footer-main { display: flex; justify-content: space-between; align-items: start; gap: 35px; padding-bottom: 40px; }
+    .footer-brand-note { max-width: 230px; margin-top: 15px; color: rgba(240,238,231,.55); font-size: 10px; line-height: 1.7; }
+    .footer-contacts { display: flex; flex-wrap: wrap; gap: 18px 38px; }
+    .footer-contact-label { display: block; margin-bottom: 7px; color: rgba(240,238,231,.45); font-size: 8px; letter-spacing: .15em; text-transform: uppercase; }
+    .footer-contact-value { color: var(--paper); text-decoration: none; font: 18px var(--serif); }
+    .footer-socials { display: flex; gap: 18px; }
+    .footer-socials a { color: #b7c1b0; text-decoration: none; font-size: 10px; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.14); color: rgba(240,238,231,.42); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; }
+    .mobile-book { display: none; }
+
+    @media (max-width: 900px) {
+      .nav { gap: 18px; }
+      .nav a { font-size: 8px; }
+      .header-book { display: none; }
+      .hero { min-height: 100vh; min-height: 100svh; }
+      .hero::before { background-position: 58% center; }
+      .hero-copy { max-width: 540px; }
+      .masters-layout { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 34px; }
+      .master-card { width: min(267px, 68%); }
+      .about-grid { gap: 7%; }
+      .visit-copy { padding-left: 32px; }
+    }
+    @media (max-width: 640px) {
+      .wrap, .hero-content, .hero-index { width: calc(100% - 36px); }
+      .header-inner { min-height: 76px; }
+      .brand { width: 112px; height: 79px; }
+      .menu-toggle { display: block; }
+      .nav { position: absolute; top: 76px; right: 18px; left: 18px; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 8px 18px; background: #f0eee7; color: var(--ink); box-shadow: 0 12px 26px rgba(0,0,0,.18); }
+      .nav.is-open { display: flex; }
+      .nav a { padding: 15px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: 10px; }
+      .nav a:last-child { border-bottom: 0; }
+      .hero { min-height: 100vh; min-height: 100svh; align-items: end; padding: 130px 0 100px; }
+      .hero::before { background-image: linear-gradient(0deg, rgba(17,19,16,.99) 4%, rgba(17,19,16,.83) 43%, rgba(17,19,16,.18) 100%), url("assets/hero-barbershop-placeholder.jpg"); background-position: 64% center; }
+      .hero-copy { max-width: 100%; }
+      .hero h1 { margin: 22px 0 18px; font-size: clamp(50px, 14vw, 74px); }
+      .hero-lede { max-width: 340px; font-size: 13px; }
+      .hero-actions { flex-direction: column; align-items: stretch; gap: 9px; margin-top: 26px; }
+      .hero-actions .button { width: 100%; }
+      .hero-side-note { display: none; }
+      .hero-index { display: none; }
+      .section { padding: 76px 0; }
+      .masters-layout { grid-template-columns: 1fr; gap: 28px; }
+      .masters-copy { max-width: 520px; }
+      .masters-copy h2 { font-size: clamp(46px, 12vw, 60px); }
+      .masters-copy p { font-size: 13px; }
+      .section-head { align-items: start; flex-direction: column; margin-bottom: 30px; }
+      .section h2 { font-size: clamp(42px, 12vw, 50px); }
+      .section-intro { max-width: 340px; }
+      .master-track { width: 100vw; min-height: 540px; margin-left: calc(50% - 50vw); }
+      .master-card { width: min(360px, 76vw); }
+      .portrait { min-height: 245px; }
+      .master-info { padding: 19px; }
+      .carousel-controls { gap: 10px; }
+      .carousel-arrow { width: 50px; height: 50px; flex: 0 0 50px; }
+      .carousel-dot { display: grid; place-items: center; width: 24px; height: 28px; background: transparent; }
+      .carousel-dot::before { content: ""; display: block; width: 18px; height: 3px; background: #c7c5bd; transition: background .2s ease; }
+      .carousel-dot.is-active { background: transparent; }
+      .carousel-dot.is-active::before { background: var(--sage-dark); }
+      .carousel-foot { flex-direction: column; gap: 6px; }
+      .about-grid { grid-template-columns: 1fr; gap: 26px; }
+      .about-copy { font-size: 13px; }
+      .service-list { grid-template-columns: 1fr; }
+      .service { align-items: flex-start; }
+      .service-name { flex: 1; font-size: 18px; }
+      .service-price { min-width: 80px; font-size: 15px; text-align: right; }
+      .services-bottom { align-items: stretch; flex-direction: column; }
+      .services-bottom .button { width: 100%; }
+      .visit-grid { grid-template-columns: 1fr; }
+      .visit-copy { padding: 65px 18px; }
+      .visit-copy h2 { font: 400 clamp(42px, 12vw, 52px)/.98 var(--serif); letter-spacing: -.045em; }
+      .visit-map { min-height: 340px; }
+      .map-marker { width: 38px; height: 38px; }
+      .map-marker__dot { font-size: 15px; }
+      .map-marker__card { width: clamp(145px, 45vw, 185px); padding: 10px 11px; }
+      .map-marker__name { font-size: 17px; }
+      .map-marker__address { font-size: 9px; }
+      .map-marker__hint { margin-top: 5px; font-size: 7px; }
+      .map-note { right: 14px; bottom: 12px; font-size: 7px; }
+      .footer-main { flex-direction: column; }
+      .footer-contacts { flex-direction: column; gap: 21px; }
+      .footer-bottom { flex-direction: column; gap: 7px; }
+      .mobile-book { position: fixed; z-index: 7; right: 0; bottom: 0; left: 0; display: flex; padding: 10px 16px max(10px, env(safe-area-inset-bottom)); background: rgba(17,19,15,.94); backdrop-filter: blur(10px); }
+      .mobile-book .button { width: 100%; min-height: 48px; }
+      body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; scroll-snap-type: none; } *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Brexit Barbershop — на главную">
+        <img src="assets/brexit-logo-transparent.png" alt="Brexit">
+      </a>
+      <nav class="nav" id="site-nav" aria-label="Главная навигация">
+        <a href="#masters">Мастера</a>
+        <a href="#services">Услуги</a>
+        <a href="#about">О нас</a>
+        <a href="#visit">Контакты</a>
+      </nav>
+      <a class="button button--sage header-book" href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer">Записаться <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="site-nav">☰</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <div class="hero-copy">
+          <div class="eyebrow">Астрахань</div>
+          <h1 id="hero-title">Дело<br>в <em>деталях.</em></h1>
+          <p class="hero-lede">Brexit — про комфорт и качество. Хорошая стрижка начинается с разговора, а заканчивается ощущением: «вот теперь точно я».</p>
+          <div class="hero-actions">
+            <a class="button button--sage" href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer">Выбрать время <span aria-hidden="true">↗</span></a>
+            <a class="button button--outline" href="#masters">Познакомиться с мастерами <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-side-note">Комфорт · качество · внимание к деталям</div>
+      <div class="hero-index"><span><strong>BREXIT</strong> / BARBERSHOP</span></div>
+    </section>
+
+    <section class="section masters" id="masters" aria-labelledby="masters-title">
+      <div class="wrap masters-layout">
+        <div class="masters-copy">
+          <div class="eyebrow">Команда Brexit</div>
+          <h2 id="masters-title">Кто сегодня<br>за ножницами?</h2>
+          <p>Пять характеров, пять почерков. Листайте карточки, знакомьтесь и выбирайте мастера, с которым совпадётесь.</p>
+        </div>
+        <div class="masters-showcase">
+        <div class="master-track" id="master-track" tabindex="0" aria-label="Карусель мастеров">
+          <article class="master-card">
+            <div class="portrait" aria-hidden="true"></div>
+            <div class="master-info"><div class="master-role">Ведущий специалист · 4 года опыта</div><h3>Наиля</h3><p class="master-meta">Внимание к деталям и стрижка, в которой всё на своём месте.</p><p class="master-quip">Сначала выслушает. Потом выверит каждую линию.</p><a class="button button--dark" href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer" aria-label="Выбрать Наилю при онлайн-записи">Выбрать мастера <span aria-hidden="true">↗</span></a></div>
+          </article>
+          <article class="master-card">
+            <div class="portrait portrait--two" aria-hidden="true"></div>
+            <div class="master-info"><div class="master-role">Ведущий специалист · 7 лет опыта</div><h3>Алексей</h3><p class="master-meta">Классика, аккуратность и отдельный кабинет для спокойной стрижки.</p><p class="master-quip">Меньше суеты. Больше точности. Идеально по форме.</p><a class="button button--dark" href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer" aria-label="Выбрать Алексея при онлайн-записи">Выбрать мастера <span aria-hidden="true">↗</span></a></div>
+          </article>
+          <article class="master-card">
+            <div class="portrait portrait--three" aria-hidden="true"></div>
+            <div class="master-info"><div class="master-role">Старший мастер</div><h3>Лия</h3><p class="master-meta">Жизнерадостный характер и чуткое понимание того, что нужно гостю.</p><p class="master-quip">Спокойный вайб. Свежий образ. Можно выдохнуть.</p><a class="button button--dark" href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer" aria-label="Выбрать Лию при онлайн-записи">Выбрать мастера <span aria-hidden="true">↗</span></a></div>
+          </article>
+          <article class="master-card">
+            <div class="portrait portrait--four" aria-hidden="true"></div>
+            <div class="master-info"><div class="master-role">Старший мастер · 4 года опыта</div><h3>Рамис</h3><p class="master-meta">Чёткий fade, моделирование бороды и советы по стилю без лишней воды.</p><p class="master-quip">Сложный fade? Борода просит форму? Задача принята.</p><a class="button button--dark" href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer" aria-label="Выбрать Рамиса при онлайн-записи">Выбрать мастера <span aria-hidden="true">↗</span></a></div>
+          </article>
+          <article class="master-card">
+            <div class="portrait portrait--five" aria-hidden="true"></div>
+            <div class="master-info"><div class="master-role">Младший мастер</div><h3>Лилия</h3><p class="master-meta">Поможет собрать стильный образ и подобрать подходящий уход.</p><p class="master-quip">Образ найдём. Уход — только тот, который вам подходит.</p><a class="button button--dark" href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer" aria-label="Выбрать Лилию при онлайн-записи">Выбрать мастера <span aria-hidden="true">↗</span></a></div>
+          </article>
+        </div>
+        <div class="carousel-controls" aria-label="Управление каруселью мастеров">
+          <button class="carousel-arrow" type="button" data-shift="-1" aria-label="Предыдущий мастер">←</button>
+          <div class="carousel-dots" id="carousel-dots" aria-label="Позиция в карусели"></div>
+          <button class="carousel-arrow" type="button" data-shift="1" aria-label="Следующий мастер">→</button>
+        </div>
+        <div class="carousel-foot"><span id="carousel-count">01 / 05</span><span>Стрелки или свайп — карусель зациклена</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="wrap about-grid">
+        <div><div class="eyebrow">Больше, чем стрижка</div><h2 id="about-title">Место, где<br>можно быть<br><em>собой.</em></h2></div>
+        <div class="about-copy"><p>Здесь можно обновить стрижку, привести в порядок бороду, поговорить о своём или просто провести час в комфортной атмосфере.</p><p>Выбирайте услугу и мастера — остальное мы обсудим в кресле.</p><div class="about-signature">Brexit — про комфорт и качество.</div></div>
+      </div>
+    </section>
+
+    <section class="section services" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Прайс-лист</div><h2 id="services-title">Точный штрих.<br>Честная цена.</h2></div><p class="section-intro">Цены указаны «от» по открытой странице барбершопа. Уточните стоимость для выбранного мастера при записи.</p></div>
+        <div class="service-list">
+          <div class="service"><div class="service-name">Мужская стрижка<span class="service-note">Подбор формы и укладка</span></div><div class="service-price">900–1 400 ₽</div></div>
+          <div class="service"><div class="service-name">Стрижка машинкой</div><div class="service-price">от 800 ₽</div></div>
+          <div class="service"><div class="service-name">Детская стрижка</div><div class="service-price">от 900 ₽</div></div>
+          <div class="service"><div class="service-name">Хайр-тату</div><div class="service-price">от 200 ₽</div></div>
+          <div class="service"><div class="service-name">Моделирование бороды</div><div class="service-price">от 800 ₽</div></div>
+          <div class="service"><div class="service-name">Королевское бритьё</div><div class="service-price">от 1 000 ₽</div></div>
+          <div class="service"><div class="service-name">Бритьё головы опасным лезвием</div><div class="service-price">от 1 200 ₽</div></div>
+          <div class="service"><div class="service-name">Тонирование бороды</div><div class="service-price">от 800 ₽</div></div>
+          <div class="service"><div class="service-name">Тонирование головы</div><div class="service-price">от 1 100 ₽</div></div>
+          <div class="service"><div class="service-name">SPA-уход за кожей лица</div><div class="service-price">от 900 ₽</div></div>
+          <div class="service"><div class="service-name">Чёрная маска</div><div class="service-price">от 900 ₽</div></div>
+          <div class="service"><div class="service-name">Коррекция бровей</div><div class="service-price">от 600 ₽</div></div>
+          <div class="service"><div class="service-name">Депиляция воском</div><div class="service-price">от 400 ₽</div></div>
+        </div>
+        <div class="services-bottom"><p>Прайс перенесён из публичной страницы Taplink и может обновляться. Перед визитом лучше сверить цену и доступность услуги при онлайн-записи.</p><a class="button button--dark" href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer">Записаться онлайн <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div class="visit-grid">
+        <div class="visit-copy"><div class="eyebrow">Ждём в гости</div><h2 id="visit-title">Ваше кресло<br>уже почти<br><em>готово.</em></h2><p>В Астрахани работают два филиала Brexit. Выберите адрес — 2ГИС построит маршрут от вашего местоположения.</p><div class="visit-actions" aria-label="Маршруты до филиалов Brexit">
+          <a class="button button--dark visit-route" href="https://2gis.ru/astrakhan/routeSearch/rsType/car/to/48.037042,46.349076" target="_blank" rel="noreferrer" aria-label="Построить маршрут в 2ГИС до Brexit, улица Кирова, 21А">
+            <span class="visit-route__text"><span class="visit-route__address">Brexit · ул. Кирова, 21А</span><span class="visit-route__action">Построить маршрут в 2ГИС</span></span><span aria-hidden="true">↗</span>
+          </a>
+          <a class="button button--dark visit-route" href="https://2gis.ru/astrakhan/routeSearch/rsType/car/to/48.005223,46.335222" target="_blank" rel="noreferrer" aria-label="Построить маршрут в 2ГИС до Brexit, Набережная Приволжского затона, 34Б">
+            <span class="visit-route__text"><span class="visit-route__address">Brexit · Набережная Приволжского затона, 34Б</span><span class="visit-route__action">Построить маршрут в 2ГИС</span></span><span aria-hidden="true">↗</span>
+          </a>
+        </div></div>
+        <div class="visit-map" aria-label="Схематичная карта двух филиалов Brexit в Астрахани">
+          <img class="visit-map-art" src="assets/astrakhan-relief-map.png" alt="" aria-hidden="true">
+          <a class="map-marker map-marker--south" style="--map-x:19%;--map-y:74%" href="https://yandex.ru/maps/?ll=48.005223%2C46.335222&z=16&pt=48.005223%2C46.335222" target="_blank" rel="noreferrer" aria-label="Brexit, Набережная Приволжского затона, 34Б — открыть точку на Яндекс Картах">
+            <span class="map-marker__dot" aria-hidden="true">B</span><span class="map-marker__card"><span class="map-marker__name">Brexit</span><span class="map-marker__address">Набережная Приволжского затона, 34Б</span><span class="map-marker__hint">Открыть точку ↗</span></span>
+          </a>
+          <a class="map-marker map-marker--north" style="--map-x:68%;--map-y:33%" href="https://yandex.ru/maps/?ll=48.037042%2C46.349076&z=16&pt=48.037042%2C46.349076" target="_blank" rel="noreferrer" aria-label="Brexit, улица Кирова, 21А — открыть точку на Яндекс Картах">
+            <span class="map-marker__dot" aria-hidden="true">B</span><span class="map-marker__card"><span class="map-marker__name">Brexit</span><span class="map-marker__address">ул. Кирова, 21А</span><span class="map-marker__hint">Открыть точку ↗</span></span>
+          </a>
+          <span class="map-note">Схема центра Астрахани · не в масштабе</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-main">
+        <div><a class="brand" href="#top" aria-label="Brexit Barbershop — наверх"><img src="assets/brexit-logo-transparent.png" alt="Brexit"></a><p class="footer-brand-note">Комфорт, качество и внимание к деталям. Астрахань.</p></div>
+        <div class="footer-contacts">
+          <div><span class="footer-contact-label">Запись и вопросы</span><a class="footer-contact-value" href="tel:+79275697009">+7 927 569-70-09</a></div>
+          <div><span class="footer-contact-label">Напишите нам</span><div class="footer-socials"><a href="https://wa.me/79275697009" target="_blank" rel="noreferrer">WhatsApp ↗</a><a href="https://t.me/Brexit_barbershop" target="_blank" rel="noreferrer">Telegram ↗</a></div></div>
+          <div><span class="footer-contact-label">Следите за Brexit</span><div class="footer-socials"><a href="https://www.instagram.com/brexit.astrakhan/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://2gis.ru/astrakhan/geo/70000001030251797" target="_blank" rel="noreferrer">2ГИС ↗</a></div></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>Brexit Barbershop · Астрахань</span><span>Демо-концепт · визуалы временные</span><a href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer">Онлайн-запись ↗</a></div>
+    </div>
+  </footer>
+  <div class="mobile-book"><a class="button button--sage" href="https://b527621.yclients.com/select-city/92/select-branch?o=" target="_blank" rel="noreferrer">Записаться онлайн <span aria-hidden="true">↗</span></a></div>
+
+  <script>
+    const track = document.querySelector('#master-track');
+    const cards = [...document.querySelectorAll('.master-card')];
+    const dots = document.querySelector('#carousel-dots');
+    const count = document.querySelector('#carousel-count');
+    const menuButton = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('#site-nav');
+    let activeIndex = 0;
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.button').forEach(button => {
+        const resetTilt = () => {
+          button.style.setProperty('--button-rotate-x', '0deg');
+          button.style.setProperty('--button-rotate-y', '0deg');
+        };
+        button.addEventListener('pointermove', event => {
+          if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') return;
+          const bounds = button.getBoundingClientRect();
+          const x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+          const y = ((event.clientY - bounds.top) / bounds.height) * 2 - 1;
+          if (Math.hypot(x, y) < .28) {
+            resetTilt();
+            return;
+          }
+          button.style.setProperty('--button-rotate-x', `${y * 6}deg`);
+          button.style.setProperty('--button-rotate-y', `${-x * 7}deg`);
+        });
+        button.addEventListener('pointerleave', resetTilt);
+      });
+    }
+
+    const goTo = index => {
+      activeIndex = (index + cards.length) % cards.length;
+      renderCarousel();
+    };
+    const renderCarousel = () => {
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      const step = cardWidth * .57;
+      const middle = Math.floor(cards.length / 2);
+
+      cards.forEach((card, index) => {
+        let offset = (index - activeIndex + cards.length) % cards.length;
+        if (offset > middle) offset -= cards.length;
+        const distance = Math.abs(offset);
+        const isActive = distance === 0;
+        const isNeighbor = distance === 1;
+        const scale = isActive ? 1 : isNeighbor ? .94 : .88;
+
+        card.classList.toggle('is-active', isActive);
+        card.classList.toggle('is-neighbor', isNeighbor);
+        card.classList.toggle('is-hidden', distance > 1);
+        card.style.zIndex = isActive ? '4' : isNeighbor ? '2' : '0';
+        card.style.transform = `translate3d(calc(-50% + ${offset * step}px), 0, 0) scale(${scale})`;
+        card.setAttribute('aria-hidden', String(!isActive));
+        card.inert = !isActive;
+      });
+
+      track.style.height = `${Math.max(...cards.map(card => card.offsetHeight)) + 16}px`;
+      [...dots.children].forEach((dot, index) => {
+        const isActive = index === activeIndex;
+        dot.classList.toggle('is-active', isActive);
+        dot.setAttribute('aria-current', String(isActive));
+      });
+      count.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+    };
+
+    cards.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'carousel-dot' + (index === 0 ? ' is-active' : '');
+      dot.setAttribute('aria-label', `Перейти к мастеру ${index + 1}`);
+      dot.addEventListener('click', () => goTo(index));
+      dots.append(dot);
+    });
+    document.querySelectorAll('[data-shift]').forEach(button => button.addEventListener('click', () => {
+      goTo(activeIndex + Number(button.dataset.shift));
+    }));
+    let swipeStartX = null;
+    track.addEventListener('pointerdown', event => {
+      if (!event.target.closest('a, button')) swipeStartX = event.clientX;
+    });
+    track.addEventListener('pointerup', event => {
+      if (swipeStartX === null) return;
+      const delta = event.clientX - swipeStartX;
+      swipeStartX = null;
+      if (Math.abs(delta) > 36) goTo(activeIndex + (delta < 0 ? 1 : -1));
+    });
+    track.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight') goTo(activeIndex + 1);
+      if (event.key === 'ArrowLeft') goTo(activeIndex - 1);
+    });
+    window.addEventListener('resize', renderCarousel);
+    renderCarousel();
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Открыть меню' : 'Закрыть меню');
+      nav.classList.toggle('is-open', !isOpen);
+    });
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Открыть меню');
+    }));
+  </script>
+</body>
+</html>
